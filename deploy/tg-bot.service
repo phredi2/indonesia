@@ -1,0 +1,19 @@
+[Unit]
+Description=Telegram Claude Bot
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=tg-bot
+Group=tg-bot
+WorkingDirectory=/opt/tg-bot
+EnvironmentFile=/opt/tg-bot/.env
+ExecStart=/opt/tg-bot/venv/bin/python /opt/tg-bot/tg_bot.py
+Restart=on-failure
+RestartSec=10
+StandardOutput=append:/var/log/tg-bot/bot.log
+StandardError=append:/var/log/tg-bot/bot.log
+
+[Install]
+WantedBy=multi-user.target
